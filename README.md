@@ -1,36 +1,105 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🧠 EXAONE Deep Chat
 
-## Getting Started
+AI 챗봇 웹앱 프로젝트입니다.  
+LG AI Research의 LLM인 [EXAONE-Deep](https://huggingface.co/collections/LGAI-EXAONE/exaone-deep-67d119918816ec6efa79a4aa)을 기반으로 사용자의 입력에 자연어 응답을 생성합니다.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 📦 기술 스택
+
+### 🧩 Frontend
+- [Next.js 15](https://nextjs.org/)
+- TypeScript
+- Tailwind CSS
+- React
+
+### 🚀 Backend
+- FastAPI
+- HuggingFace Transformers
+- EXAONE-Deep 모델 API 호출
+
+---
+
+## 🗂️ 폴더 구조
+
+```
+exaone-deep-chat/
+│
+├── backend/               # FastAPI 서버
+│   ├── routes/            # 라우터 (예: chat.py)
+│   ├── server.py          # FastAPI 앱 실행
+│   └── requirements.txt   # 백엔드 의존성
+│
+├── frontend/              # Next.js 앱
+│   ├── src/
+│   │   ├── app/           # Next.js app router
+│   │   │   ├── layout.tsx
+│   │   │   ├── page.tsx
+│   │   │   └── styles/
+│   │   │       └── globals.css
+│   │   ├── components/    # UI 컴포넌트 (ChatBox, Message)
+│   │   └── utils/         # API 유틸 함수 (api.ts)
+│   ├── tailwind.config.js
+│   ├── postcss.config.js
+│   └── package.json
+│
+└── README.md              # 📘 프로젝트 설명
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ⚙️ 설치 및 실행 방법
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 1. 프로젝트 클론
+```bash
+git clone https://github.com/your-id/exaone-deep-chat.git
+cd exaone-deep-chat
+```
 
-## Learn More
+### 2. 백엔드 설정 및 실행
+```bash
+cd backend
+pip install -r requirements.txt
+uvicorn server:app --reload
+```
 
-To learn more about Next.js, take a look at the following resources:
+### 3. 프론트엔드 설정 및 실행
+```bash
+cd ../frontend
+npm install
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Turbopack 문제 해결을 위해 Webpack으로 실행
+NEXT_LEGACY_TURBOPACK=true npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 4. 접속
+```
+http://localhost:3000
+```
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🤖 사용된 모델
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Model**: [`LGAI-EXAONE/EXAONE-Deep-2.4B`](https://huggingface.co/LGAI-EXAONE/EXAONE-Deep-2.4B)
+- **Pipeline**: `text-generation`
+- **Language**: Korean + English
+
+---
+
+## 📝 주요 기능
+
+- 사용자 입력 실시간 전송
+- FastAPI 서버에서 Hugging Face 모델 호출
+- 자연어 응답 생성 및 표시
+- Tailwind를 활용한 UI (커스터마이징 가능)
+
+---
+
+## 💡 참고 사항
+
+- EXAONE-Deep-32B는 너무 커서 Inference API에서 직접 실행 불가능합니다. 2.4B 모델을 사용하는 것을 추천합니다.
+- CORS 문제 해결을 위해 FastAPI에 CORS 설정을 추가해야 합니다.
+- 프론트엔드에서 Turbopack이 Tailwind와 충돌할 경우 `NEXT_LEGACY_TURBOPACK=true` 플래그를 사용합니다.
+
+---
