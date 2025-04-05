@@ -44,3 +44,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# large files
+frontend/node_modules/@next/swc-darwin-arm64/next-swc.darwin-arm64.node
